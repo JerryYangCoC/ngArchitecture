@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ShardModule } from '../shard/shard.module';
+import { SharedModule } from '../shared/shared.module';
 
 const COMPONENTS = [
   PagesComponent,
@@ -16,7 +16,7 @@ const COMPONENTS = [
   ],
   imports: [
     CommonModule,
-    ShardModule,
+    SharedModule,
     PagesRoutingModule,
   ],
   exports: [
