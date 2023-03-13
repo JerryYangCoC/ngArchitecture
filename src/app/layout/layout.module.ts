@@ -3,16 +3,19 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 
 
+const COMPONENTS = [
+  LayoutComponent,
+]
 
 @NgModule({
   declarations: [
-    LayoutComponent,
+    ...COMPONENTS,
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    LayoutComponent,
+    ...COMPONENTS,
   ]
 })
 export class LayoutModule { }
