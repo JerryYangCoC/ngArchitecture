@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, mergeMap, tap, switchMap } from 'rxjs/operators';
 import { Observable, EMPTY, of, concat } from 'rxjs';
@@ -35,16 +36,23 @@ export class StoreEffects {
   // ));
 
 
-  // test$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(StoreActions.test),
-  //     tap((value) => console.log(value)),
-  //     switchMap(() => {
+  test$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoreActions.test),
+      tap((value) => console.log(value)),
+      switchMap(() => {
+        const res = this.http.post('', {})
 
-  //     })
-  //   )
-  // )
+        const result$ = res.pipe(map((res: any) => res ?
+          StoreActions.loadStoresSuccess({ data: res }) :
+          StoreActions.loadStoresFailure({ error: res })
+        ))
+
+        return concat(result$)
+      })
+    )
+  )
 
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private http: HttpClient) {}
 }
